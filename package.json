@@ -4,7 +4,7 @@
     "description": "Example of clean architecture using typescript",
     "main": "src/index.ts",
     "scripts": {
-        "dev": "nodemon --watch \"src/**/*\" --exec ts-node -r tsconfig-paths/register .",
+        "dev": "nodemon --watch \"src/**/*\" --exec ts-node -r tsconfig-paths/register src/index.ts",
         "lint": "eslint src --ext .ts",
         "lint:fix": "eslint src --ext .ts --fix",
         "tsc": "tsc"
@@ -15,8 +15,17 @@
     ],
     "author": "lifeonfoot@qq.com",
     "license": "ISC",
-    "dependencies": {},
+    "dependencies": {
+        "inversify": "^5.0.1",
+        "inversify-koa-utils": "^1.0.0",
+        "koa": "^2.13.0",
+        "koa-bodyparser": "^4.3.0",
+        "koa-router": "^9.4.0",
+        "reflect-metadata": "^0.1.13"
+    },
     "devDependencies": {
+        "@types/koa-bodyparser": "^4.3.0",
+        "@types/koa-router": "^7.4.1",
         "@typescript-eslint/eslint-plugin": "^4.2.0",
         "@typescript-eslint/parser": "^4.2.0",
         "eslint": "^7.9.0",

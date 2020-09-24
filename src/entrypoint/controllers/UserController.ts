@@ -1,15 +1,11 @@
-import {
-    controller,
-    httpGet,
-    interfaces,
-    requestParam,
-} from "inversify-koa-utils";
-import { inject, injectable } from "inversify";
-import IUserUseCase from "src/application/usecases/IUserUseCase";
 import { TYPES } from "src/constants/types";
+import { inject, injectable } from "inversify";
+import { Request } from "restify";
+import { Controller, Get, interfaces } from "inversify-restify-utils";
+import IUserUseCase from "src/application/usecases/IUserUseCase";
 import UserDto from "src/application/dtos/UserDto";
 
-@controller("/user")
+@Controller("/user")
 @injectable()
 export default class UserController implements interfaces.Controller {
     private readonly userUseCase: IUserUseCase;
@@ -18,8 +14,8 @@ export default class UserController implements interfaces.Controller {
         this.userUseCase = userUseCase;
     }
 
-    @httpGet("/:id")
-    getUser(@requestParam("id") id: string): Promise<UserDto> {
-        return this.userUseCase.getUser(id);
+    @Get("/:id")
+    getUser(req: Request): Promise<UserDto> {
+        return this.userUseCase.getUser(req.params?.id);
     }
 }

@@ -1,10 +1,10 @@
-import { controller, httpGet, interfaces } from "inversify-koa-utils";
 import { injectable } from "inversify";
+import { Controller, Get, interfaces } from "inversify-restify-utils";
 
-@controller("/")
+@Controller("/")
 @injectable()
 export default class DefaultController implements interfaces.Controller {
-    @httpGet("/")
+    @Get("/")
     index(): string {
         return "hello index";
     }

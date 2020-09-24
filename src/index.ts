@@ -1,8 +1,6 @@
 import "reflect-metadata";
-import * as morgan from "koa-morgan";
-import * as bodyParser from "koa-bodyparser";
+import * as morgan from "morgan";
 import { Container } from "inversify";
-import { interfaces, InversifyKoaServer, TYPE } from "inversify-koa-utils";
 import DefaultController from "./entrypoint/controllers/DefaultController";
 import IUserReadOnlyRepository from "./application/repositories/IUserReadOnlyRepository";
 import { TYPES } from "./constants/types";
@@ -10,6 +8,11 @@ import UserRepository from "./infrastructure/repositories/UserRepository";
 import IUserUseCase from "./application/usecases/IUserUseCase";
 import UserUseCase from "./application/usecases/UserUseCase";
 import UserController from "./entrypoint/controllers/UserController";
+import {
+    interfaces,
+    InversifyRestifyServer,
+    TYPE,
+} from "inversify-restify-utils";
 
 const container = new Container();
 
@@ -31,9 +34,10 @@ container
 // bind services
 container.bind<IUserUseCase>(TYPES.IUserUseCase).to(UserUseCase);
 
-const server = new InversifyKoaServer(container);
+const server = new InversifyRestifyServer(container);
 server.setConfig((app) => {
-    app.use(bodyParser()).use(morgan("dev"));
+    var logger = morgan("dev");
+    app.use(logger);
 });
 
 const app = server.build();

@@ -38,9 +38,15 @@ const server = new InversifyRestifyServer(container);
 server.setConfig((app) => {
     var logger = morgan("dev");
     app.use(logger);
+
+    app.on("restifyError", (req, res, err, callback) => {
+        console.error(err.stack);
+        return callback();
+    });
 });
 
 const app = server.build();
+
 app.listen(3000, () => {
     // eslint-disable-next-line
     console.log(`server started at http://localhost:${3000}`);

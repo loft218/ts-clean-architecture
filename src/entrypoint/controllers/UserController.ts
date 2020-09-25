@@ -15,7 +15,9 @@ export default class UserController implements interfaces.Controller {
     }
 
     @Get("/:id")
-    getUser(req: Request): Promise<UserDto> {
-        return this.userUseCase.getUser(req.params?.id);
+    async getUser(req: Request, res: Response): Promise<UserDto> {
+        const user = await this.userUseCase.getUser(req.params?.id);
+        if (!user) throw new Error("user not found");
+        return user;
     }
 }

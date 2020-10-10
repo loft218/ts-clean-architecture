@@ -7,7 +7,9 @@
         "dev": "nodemon --watch \"src/**/*\" --exec ts-node -r tsconfig-paths/register src/index.ts",
         "lint": "eslint src --ext .ts",
         "lint:fix": "eslint src --ext .ts --fix",
-        "tsc": "tsc"
+        "tsc": "tsc",
+        "test": "nyc --clean --all --require ts-node/register --require tsconfig-paths/register --require reflect-metadata/Reflect --extension .ts -- mocha --exit --timeout 5000",
+        "test:all": "npm test __test__/**/*.spec.ts"
     },
     "keywords": [
         "typescript",
@@ -24,16 +26,24 @@
         "restify-errors": "^8.0.2"
     },
     "devDependencies": {
+        "@types/chai": "^4.2.13",
+        "@types/chai-http": "^4.2.0",
+        "@types/mocha": "^8.0.3",
         "@types/morgan": "^1.9.1",
         "@types/restify": "^8.4.2",
         "@types/restify-errors": "^4.3.3",
+        "@types/sinon-chai": "^3.2.5",
         "@typescript-eslint/eslint-plugin": "^4.2.0",
         "@typescript-eslint/parser": "^4.2.0",
+        "chai": "^4.2.0",
+        "chai-http": "^4.3.0",
         "eslint": "^7.9.0",
         "eslint-config-prettier": "^6.11.0",
         "eslint-plugin-prettier": "^3.1.4",
+        "mocha": "^8.1.3",
         "nodemon": "^2.0.4",
         "prettier": "^2.1.2",
+        "sinon-chai": "^3.5.0",
         "ts-node": "^9.0.0",
         "tsconfig-paths": "^3.9.0",
         "typescript": "^4.0.3"
